@@ -10,22 +10,20 @@
 
 body{
     margin:0;
-    padding:20px;
-    font-family:Arial,sans-serif;
-    background-image:url('https://datatemphgw-create.github.io/antrian-tracking/hermina_gold_3.jpg');
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+    padding:20px 20px 60px 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:url('XL2.jpg');
+    color: #333;
 }
 
 .card{
-    max-width:500px;
-    margin:50px auto;
-    background:radial-gradient(circle at 0 115px, transparent 15px, white 16px) top left / 50% 100% no-repeat,
-               radial-gradient(circle at 100% 115px, transparent 15px, white 16px) top right / 50% 100% no-repeat;
-    border-radius:15px;
-    padding:30px;
-    filter:drop-shadow(0 5px 20px rgba(0,0,0,.1));
+    max-width:420px;
+    margin: 20px auto;
+    background: radial-gradient(circle at center, #ffffff 0%, #f9fff9 100%);
+    border: 1px solid rgba(25, 135, 84, 0.2);
+    border-radius: 16px;
+    padding:25px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     text-align:center;
 }
 
@@ -33,27 +31,28 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:15px;
-    margin:0 -15px 30px -15px;
-    padding-bottom:25px;
-    border-bottom:2px dashed #ccc;
+    gap:12px;
+    margin:0 -10px 20px -10px;
+    padding-bottom:20px;
+    border-bottom:1px dashed rgba(25, 135, 84, 0.3);
 }
 
 .kop img{
-    width:60px;
+    width:45px;
 }
 
 .kop h2{
     margin:0;
-    font-size:24px;
-    color:#2e7d32;
+    font-size:18px;
+    font-weight:600;
+    color:#198754;
 }
 
 .ticket-body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-top:20px;
+    margin-top:15px;
 }
 
 .status-waktu{
@@ -64,23 +63,26 @@ body{
 }
 
 .nomor{
-    font-size:38px;
-    font-weight:bold;
+    font-size:40px;
+    font-weight:800;
+    color:#198754;
+    line-height:1;
 }
 
 .status{
-    font-size:18px;
-    margin-bottom:5px;
+    font-size:15px;
+    margin-bottom:4px;
+    font-weight:600;
     text-transform:capitalize;
 }
 
 .waktu{
-    color:#666;
-    font-size:12px;
+    color:#777;
+    font-size:13px;
 }
 
 .selesai{
-    color:#28a745;
+    color:#198754;
 }
 
 .siap_diambil{
@@ -97,13 +99,12 @@ body{
 
 .footer{
     position:fixed;
-    bottom:20px;
+    bottom:15px;
     left:0;
     width:100%;
     text-align:center;
-    font-size:14px;
-    color:#555;
-    font-weight:bold;
+    font-size:12px;
+    color:#777;
 }
 
 /* Popup styles */
@@ -169,6 +170,61 @@ body{
     background: #1b5e20;
 }
 
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #198754;
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(25, 135, 84, 0.4);
+}
+
+.btn-secondary {
+    background: #20c997;
+    color: white;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(32, 201, 151, 0.4);
+}
+
+@media (max-width: 480px) {
+    .card {
+        margin: 15px auto;
+        padding: 20px;
+    }
+    .nomor {
+        font-size: 32px;
+    }
+    .kop h2 {
+        font-size: 16px;
+    }
+    .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
 </style>
 
 </head>
@@ -209,6 +265,17 @@ body{
 
 </div>
 
+<div class="card">
+    <h3 style="color: #198754; margin-top: 0; margin-bottom: 12px; font-size: 18px;">Hasil Laboratorium</h3>
+    <p style="font-size: 14px; color: #555; margin-bottom: 20px; line-height: 1.5; text-align: left;">
+        Pasien harus melakukan <strong>Pengajuan Hasil Lab</strong> terlebih dahulu. Setelah pengajuan diproses dan dikonfirmasi oleh petugas laboratorium, barulah pasien dapat mengklik tombol <strong>Lihat Hasil Lab</strong>.
+    </p>
+    <div class="action-buttons">
+        <a href="#" target="_blank" class="btn btn-primary">Pengajuan Hasil Lab</a>
+        <a href="#" target="_blank" class="btn btn-secondary">Lihat Hasil Lab</a>
+    </div>
+</div>
+
 <div class="footer">
     Developed by IT RS Hermina Grand Wisata
 </div>
@@ -216,31 +283,49 @@ body{
 <script>
 
 // QR menggunakan:
-// ?id=A-001
-// ?id=A-002
+// ?antrian=L-001
+// ?antrian=L-002
 
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const id = params.get("antrian");
 
 let lastWaktuPanggil = null;
 let isInitialLoad = true;
 
 async function loadData(){
 
+    if(!id){
+        document.getElementById("nomor").innerHTML = "Parameter Antrian Kosong";
+        document.getElementById("status").innerHTML = "";
+        document.getElementById("waktu").innerHTML = "";
+        return;
+    }
+
     try{
 
-        const url = "https://script.google.com/macros/s/AKfycbxkS8sgA7rdkwDDDDBPdziAD3Wt3FSa-myU40cyzmHyFk8xiV5lG6QTwNXaui18yCXI-A/exec";
+        const url = "https://script.google.com/macros/s/AKfycbxCwbxYpaOnLx7O3vCrnOwvAjKN5XCW4-6F4my4ApvIc4LcB1YckIijy-92fHujcEwE/exec?antrian=" + id;
+        
+        console.log("URL yang diakses: ", url);
 
         const response = await fetch(url);
-        const data = await response.json();
+        const json = await response.json();
 
-        console.log(data);
+        console.log("Balasan Server: ", json);
 
-        const item = data.find(
-            (row, index) => index > 0 && row[0] === id
-        );
+        // Periksa apakah format balasan memiliki property 'success: true' dan 'data' berupa array
+        if(!json.success || !Array.isArray(json.data)){
+            throw new Error("Format balasan tidak valid atau tidak sukses.");
+        }
+        
+        let item;
+        // Cek apakah json.data berisi banyak baris (Array 2D) atau langsung 1 baris (Array 1D)
+        if(Array.isArray(json.data[0])){
+            item = json.data.find(row => row[0] === id);
+        } else {
+            item = json.data;
+        }
 
-        if(!item){
+        if(!item || item[0] !== id){
 
             document.getElementById("nomor").innerHTML =
             "Data Tidak Ditemukan";
@@ -303,6 +388,10 @@ async function loadData(){
         document.getElementById("status").innerHTML =
         "Gagal mengambil data";
 
+        } finally {
+            // Polling rekursif dipanggil setelah request sebelumnya selesai. 
+            // Menghindari penumpukan request ke server Google Apps Script.
+            setTimeout(loadData, 3000); // Cek setiap 3 detik
     }
 
 }
@@ -322,9 +411,6 @@ function playNotification() {
 }
 
 loadData();
-
-// refresh tiap 1 detik
-setInterval(loadData,1000);
 
 </script>
 
